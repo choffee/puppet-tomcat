@@ -17,7 +17,7 @@ Usage:
 class tomcat::debian inherits tomcat::package {
 
   # avoid partial configuration on untested-debian-releases
-  if $lsbdistcodename !~ /^(lenny|squeeze)$/ {
+  if $lsbdistcodename !~ /^(lenny|squeeze|lucid)$/ {
     fail "class ${name} not tested on ${operatingsystem}/${lsbdistcodename}"
   }
 
@@ -26,7 +26,9 @@ class tomcat::debian inherits tomcat::package {
 
   # Workaround while tomcat-juli.jar and tomcat-juli-adapters.jar aren't
   # included in tomcat6-* packages.
-  include tomcat::juli
+  if $lsbdistcodename !~ /^(lucid)$/ {
+    include tomcat::juli
+  }
 
   # link logging libraries from java
   include tomcat::logging

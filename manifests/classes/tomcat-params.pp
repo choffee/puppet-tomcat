@@ -38,6 +38,9 @@ class tomcat::params {
       "Debian" => $lsbdistcodename ? {
         /lenny|squeeze/ => "6",
       },
+      "Ubuntu" => $lsbdistcodename ? {
+          "lucid" => "6",
+      }
       "Redhat" => $lsbdistcodename ? {
         "Tikanga"  => "5.5",
         "Santiago" => "6",
